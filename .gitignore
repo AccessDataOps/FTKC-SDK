@@ -1,0 +1,8 @@
+*.pyc
+*/__pycache__
+*.zip
+
+/AccessData_SDK.egg-info/*
+/build/*
+/documentation/*
+/dist/*
