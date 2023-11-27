@@ -8,4 +8,4 @@ To install:
 
 _ONLINE_
 
-`pip install https://github.com/AccessDataOps/FTKC-SDK/archive/refs/tags/v1.0.0.zip`
+`pip install https://github.com/AccessDataOps/FTKC-SDK/archive/refs/tags/v1.1.0.zip`
