@@ -26,6 +26,7 @@ if __name__ == "__main__":
 		author="Thomas Vieth",
 		author_email="sriram.appusamy@exterro.com",
 		url="https://github.com/AccessDataOps/FTKC-SDK",
+		license = "MIT License",
 		packages=[
 			"accessdata",
 			"accessdata.api"
