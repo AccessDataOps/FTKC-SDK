@@ -14,18 +14,18 @@ reqs = [line.strip('\n') for line in open(requirements_path, "r").readlines()]
 
 ##
 
-VERSION = "0.7.0"
+VERSION = "1.0.0"
 
 ##
 
 if __name__ == "__main__":
 	setup(
-		name="accessdata-sdk",
+		name="accessdata-ftkc-sdk",
 		version=VERSION,
-		description="Python Library for AccessData's API",
+		description="Python Library for AccessData's FTKC API",
 		author="Thomas Vieth",
-		author_email="thomas.vieth@exterro.com",
-		url="https://github.com/AccessDataOps/FTK-API-SDK",
+		author_email="sriram.appusamy@exterro.com",
+		url="https://github.com/AccessDataOps/FTKC-SDK",
 		packages=[
 			"accessdata",
 			"accessdata.api"
