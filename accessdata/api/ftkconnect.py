@@ -1,4 +1,5 @@
 from .extensions import trigger_workflow_ext
+from datetime import datetime, timezone
 
 class FTKConnect():
 
@@ -22,29 +23,34 @@ class FTKConnect():
         
         """
         workflow_details={}
-
         workflow_id = args["automation_id"]
-        # Process in existing case ids
-        if "case_ids" in args:
-            workflow_details["createCase"]={"CaseIds": args['case_ids'] }
-        # Process in new case
-        elif "case_ids" not in args and "case_name" in args:
-            workflow_details={ "createCase": {"CaseName":args['case_name']}}
-        # Raise runtime exception neither caseid nor casename is received.
-        # elif 'caseids'not in args and 'casename' not in args:
-        #     raise ValueError("Both caseid and casename are empty")
 
+        case_name_template = ""
         if 'evidence_path'in args:
             workflow_details['AddEvidence']={'EvidencePath':args['evidence_path']}
+            case_name_template = case_name_template if case_name_template else "addevidence"
         if 'search_tag_path' in args:
             workflow_details['SearchAndTag']={"FolderLocation":[args['search_tag_path']]}
         if 'export_path' in args:
             workflow_details['Export']={"ExportPath":args['export_path']}
+
         agent_ips = []
         if 'target_ips' in args:
             agent_ips  = args['target_ips']
+            case_name_template = agent_ips[0]
         workflow_details['Collection']={"targetips":agent_ips}
 
+        # Process in existing case ids
+        if "case_ids" in args:
+            workflow_details["createCase"] = {"CaseIds":args['case_ids']}
+        # Process in new case
+        elif "case_ids" not in args and "case_name" in args:
+            workflow_details["createCase"] = {"CaseName":args['case_name']}
+        elif "case_ids" not in args and "case_name" not in args and case_name_template:
+            timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H-%M-%S")
+            case_name = f"CORTEX_XSOAR_{case_name_template}_{timestamp}"
+            workflow_details["createCase"] = {"CaseName":case_name}
+        
         return workflow_id, workflow_details
 
     def trigger(self,**args):
