@@ -37,7 +37,8 @@ class FTKConnect():
         agent_ips = []
         if 'target_ips' in args:
             agent_ips  = args['target_ips']
-            case_name_template = agent_ips[0]
+            if len(agent_ips)>0:
+                case_name_template = agent_ips[0]
         workflow_details['Collection']={"targetips":agent_ips}
 
         # Process in existing case ids
