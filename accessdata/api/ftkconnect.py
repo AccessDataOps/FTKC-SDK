@@ -38,7 +38,7 @@ class FTKConnect():
         if 'target_ips' in args:
             agent_ips  = args['target_ips']
             if len(agent_ips)>0:
-                case_name_template = agent_ips[0]
+               case_name_template = agent_ips[0]
         workflow_details['Collection']={"targetips":agent_ips}
 
         # Process in existing case ids
@@ -49,7 +49,7 @@ class FTKConnect():
             workflow_details["createCase"] = {"CaseName":args['case_name']}
         elif "case_ids" not in args and "case_name" not in args and case_name_template:
             timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H-%M-%S")
-            case_name = f"CORTEX_XSOAR_{case_name_template}_{timestamp}"
+            case_name = f"{workflow_id}_Cortex XSOAR_{case_name_template}_{timestamp}"
             workflow_details["createCase"] = {"CaseName":case_name}
         
         return workflow_id, workflow_details
